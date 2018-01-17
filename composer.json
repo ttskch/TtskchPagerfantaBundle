@@ -1,0 +1,22 @@
+{
+    "name": "ttskch/pagerfanta-bundle",
+    "description": "Most easy and customizable way to use Pagerfanta with Symfony",
+    "keywords": ["pagerfanta", "symfony", "sortable", "customizable", "searchable"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ttskch\\PagerfantaBundle\\": ""
+        }
+    },
+    "require": {
+        "php": ">=5.5.9|^7.1.3",
+        "cakephp/utility": "^3.5",
+        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/twig-bundle": "^3.4|^4.0",
+        "pagerfanta/pagerfanta": "^1.0"
+    },
+    "require-dev": {
+        "symfony/form": "^3.4|^4.0"
+    }
+}

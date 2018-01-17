@@ -1,0 +1,22 @@
+services:
+    ttskch_pagerfanta.config:
+        public: true
+        class: Ttskch\PagerfantaBundle\Config
+        properties:
+            pageName: '%ttskch_pagerfanta.page.name%'
+            pageRange: '%ttskch_pagerfanta.page.range%'
+            limitName: '%ttskch_pagerfanta.limit.name%'
+            limitDefault: '%ttskch_pagerfanta.limit.default%'
+            sortKeyName: '%ttskch_pagerfanta.sort.key.name%'
+            sortDirectionName: '%ttskch_pagerfanta.sort.direction.name%'
+            sortDirectionDefault: '%ttskch_pagerfanta.sort.direction.default%'
+            templatePager: '%ttskch_pagerfanta.template.pager%'
+            templateSortable: '%ttskch_pagerfanta.template.sortable%'
+
+    Ttskch\PagerfantaBundle\Twig\PagerfantaExtension:
+        tags: { name: twig.extension }
+        arguments:
+            - '@ttskch_pagerfanta.config'
+            - '@router'
+            - '@request_stack'
+            - '@twig'
