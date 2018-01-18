@@ -1,0 +1,5 @@
+entities:
+  user:
+    id: Id
+    name: Name
+    email: Email Address

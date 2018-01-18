@@ -1,0 +1,18 @@
+{% extends 'home/index.html.twig' %}
+
+{% block search_form %}
+
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <form action="{{ path('home_search') }}" method="get" class="form-inline mb-3">
+        <div class="form-group mr-3">
+            <div class="input-group">
+                {{ form_widget(form.query) }}
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+
+{% endblock %}

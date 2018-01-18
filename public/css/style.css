@@ -1,0 +1,19 @@
+html {
+    font-size: 14px;
+}
+
+.table-sortable thead .asc:after {
+    content: '\f0d8'; /* fa-caret-up */
+    font-family: FontAwesome;
+    margin-left: 0.3em;
+}
+
+.table-sortable thead .desc:after {
+    content: '\f0d7'; /* fa-caret-down */
+    font-family: FontAwesome;
+    margin-left: 0.3em;
+}
+
+.table-sortable thead th:first-child {
+    width: 30%;
+}

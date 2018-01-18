@@ -1,0 +1,5 @@
+ttskch_pagerfanta:
+    page:
+        range: 3
+    template:
+        pager: '@TtskchPagerfanta/pager/bootstrap4.html.twig'

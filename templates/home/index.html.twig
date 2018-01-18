@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% block search_form %}{% endblock %}
+
+    {% set users = pagerfanta.getCurrentPageResults() %}
+    {% set keys = ['id', 'name', 'email'] %}
+
+    {% if users|length > 0 %}
+        <table class="table table-bordered table-sortable">
+            <thead>
+            <tr>
+                {% for key in keys %}
+                    <th>{{ ttskch_pagerfanta_sortable(key, ('entities.user.' ~ key)|trans) }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    {% for key in keys %}
+                        <td>{{ attribute(user, key) }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-warning">Nothing was matched.</div>
+    {% endif %}
+
+    <div class="float-right">
+        {{ ttskch_pagerfanta_pager(pagerfanta) }}
+    </div>
+
+{% endblock %}
