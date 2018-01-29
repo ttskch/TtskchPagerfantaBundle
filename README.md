@@ -18,7 +18,7 @@ Advantages compared to [WhiteOctoberPagerfantaBundle](https://github.com/whiteoc
 
 You can easily try demo app like below on [demo branch](https://github.com/ttskch/TtskchPagerfantaBundle/tree/demo).
 
-![](https://user-images.githubusercontent.com/4360663/35103820-61598eb2-fcaa-11e7-9622-7d16c1b242a6.png)
+![](https://user-images.githubusercontent.com/4360663/35520375-32194706-055a-11e8-9c87-7e8a0172b7fb.png)
 
 ## Requirement
 
@@ -43,23 +43,20 @@ return [
 ```php
 // FooController.php
 
-public function index(Request $request)
+public function index(FooRepository $fooRepository)
 {
-    $paginator = $this->get('ttskch_pagerfanta.paginator')
-        ->initialize('id')
-        ->handleRequest($request)
-    ;
+    $context = $this->get('ttskch_pagerfanta.context')->initialize('id');
 
-    $queryBuilder = $userRepository
-        ->createQueryBuilder('u')
-        ->orderBy(sprintf('u.%s', $paginator->criteria->sort), $paginator->criteria->direction)
+    $queryBuilder = $fooRepository
+        ->createQueryBuilder('f')
+        ->orderBy(sprintf('f.%s', $context->criteria->sort), $context->criteria->direction)
     ;
 
     $adapter = new DoctrineORMAdapter($queryBuilder);
     $pagerfanta = new Pagerfanta($adapter);
     $pagerfanta
-        ->setMaxPerPage($paginator->criteria->limit)
-        ->setCurrentPage($paginator->criteria->page)
+        ->setMaxPerPage($context->criteria->limit)
+        ->setCurrentPage($context->criteria->page)
     ;
 
     return $this->render('index.html.twig', [
@@ -183,8 +180,8 @@ public function createQueryBuilderFromCriteria(FooCriteria $criteria)
     return $this->createQueryBuilder('f');
         ->where('f.name like :query')
         ->orWhere('f.email like :query')
-        ->setParameter('query', sprintf('%%%s%%', str_replace('%', '\%', $query)))
-        ->orderBy(sprintf('f.%s', $sort), $criteria->direction)
+        ->setParameter('query', sprintf('%%%s%%', str_replace('%', '\%', $criteria->query)))
+        ->orderBy(sprintf('f.%s', $criteria->sort), $criteria->direction)
     ;
 }
 ```
@@ -192,24 +189,21 @@ public function createQueryBuilderFromCriteria(FooCriteria $criteria)
 ```php
 // FooController.php
 
-public function index(Request $request, FormFactoryInterface $formFactory, FooRepository $repository)
+public function index(FooRepository $fooRepository)
 {
-    $paginator = $this->get('ttskch_pagerfanta.paginator')
-        ->initialize('id', FooCriteria::class, FooSearchType::class)
-        ->handleRequest($request)
-    ;
+    $context = $this->get('ttskch_pagerfanta.context')->initialize('id', FooCriteria::class, FooSearchType::class);
 
-    $queryBuilder = $fooRepository->createQueryBuilderFromCriteria($paginator->criteria);
+    $queryBuilder = $fooRepository->createQueryBuilderFromCriteria($context->criteria);
 
     $adapter = new DoctrineORMAdapter($queryBuilder);
     $pagerfanta = new Pagerfanta($adapter);
     $pagerfanta
-        ->setMaxPerPage($paginator->criteria->limit)
-        ->setCurrentPage($paginator->criteria->page)
+        ->setMaxPerPage($context->criteria->limit)
+        ->setCurrentPage($context->criteria->page)
     ;
 
     return $this->render('index.html.twig', [
-        'form' => $paginator->form->createView(),
+        'form' => $context->form->createView(),
         'pagerfanta' => $pagerfanta,
     ]);
 }
