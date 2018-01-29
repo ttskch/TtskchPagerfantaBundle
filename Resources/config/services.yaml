@@ -13,6 +13,13 @@ services:
             templatePager: '%ttskch_pagerfanta.template.pager%'
             templateSortable: '%ttskch_pagerfanta.template.sortable%'
 
+    ttskch_pagerfanta.paginator:
+        public: true
+        class: Ttskch\PagerfantaBundle\Paginator
+        arguments:
+            - '@ttskch_pagerfanta.config'
+            - '@form.factory'
+
     Ttskch\PagerfantaBundle\Twig\PagerfantaExtension:
         tags: { name: twig.extension }
         arguments:

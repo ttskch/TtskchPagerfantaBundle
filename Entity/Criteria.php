@@ -1,16 +1,16 @@
 <?php
 
-namespace Ttskch\PagerfantaBundle\Form;
+namespace Ttskch\PagerfantaBundle\Entity;
 
-class PaginationCriteria
+class Criteria
 {
     /**
-     * @var string
+     * @var int|string
      */
     public $page;
 
     /**
-     * @var string
+     * @var int|string
      */
     public $limit;
 
@@ -24,12 +24,14 @@ class PaginationCriteria
      */
     public $direction;
 
+    private $form;
+
     /**
-     * @param string $defaultLimit
+     * @param int|string $defaultLimit
      * @param string $defaultSortKey
      * @param string $defaultSortDirection
      */
-    public function __construct($defaultLimit, $defaultSortKey, $defaultSortDirection)
+    final public function __construct($defaultLimit, $defaultSortKey, $defaultSortDirection)
     {
         $this->page = 1;
         $this->limit = $defaultLimit;

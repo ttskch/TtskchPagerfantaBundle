@@ -93,9 +93,13 @@ class PagerfantaExtension extends AbstractExtension
         $currentDirection = $isSorted ? ($this->request->get($this->config->sortDirectionName) ?: $this->config->sortDirectionDefault) : null;
         $nextDirection = $isSorted ? (strtolower($currentDirection) === 'asc' ? 'desc' : 'asc') : $this->config->sortDirectionDefault;
 
+        // reset page number after re-sorting.
+        $queries = $this->request->query->all();
+        unset($queries[$this->config->pageName]);
+
         $context = array_merge($context, [
             'route' => $this->request->get('_route'),
-            'queries' => $this->request->query->all(),
+            'queries' => $queries,
             'key_name' => $this->config->sortKeyName,
             'key' => $key,
             'direction_name' => $this->config->sortDirectionName,

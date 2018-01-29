@@ -45,17 +45,23 @@ return [
 
 public function index(Request $request)
 {
-    $config = $this->get('ttskch_pagerfanta.config');
+    $paginator = $this->get('ttskch_pagerfanta.paginator')
+        ->initialize('id')
+        ->handleRequest($request)
+    ;
 
-    $queryBuilder = ...
-    
+    $queryBuilder = $userRepository
+        ->createQueryBuilder('u')
+        ->orderBy(sprintf('u.%s', $paginator->criteria->sort), $paginator->criteria->direction)
+    ;
+
     $adapter = new DoctrineORMAdapter($queryBuilder);
     $pagerfanta = new Pagerfanta($adapter);
     $pagerfanta
-        ->setMaxPerPage($request->get($config->limitName, $config->limitDefault))
-        ->setCurrentPage($request->get($config->pageName, 1))
+        ->setMaxPerPage($paginator->criteria->limit)
+        ->setCurrentPage($paginator->criteria->page)
     ;
-    
+
     return $this->render('index.html.twig', [
         'pagerfanta' => $pagerfanta,
     ]);
@@ -133,23 +139,23 @@ ttskch_pagerfanta:
 ```php
 // FooCriteria.php
 
-use Ttskch\PagerfantaBundle\Form\PaginationCriteria;
+use Ttskch\PagerfantaBundle\Entity\Criteria;
 
-class FooCriteria extends PaginationCriteria
+class FooCriteria extends Criteria
 {
     public $query;
 }
 ```
 
 ```php
-// FooType.php
+// FooSearchType.php
 
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Ttskch\PagerfantaBundle\Form\PaginationType;
+use Ttskch\PagerfantaBundle\Form\CriteriaType;
 
-class FooSearchType extends PaginationType
+class FooSearchType extends CriteriaType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -174,23 +180,12 @@ class FooSearchType extends PaginationType
 
 public function createQueryBuilderFromCriteria(FooCriteria $criteria)
 {
-    $qb = $this->createQueryBuilder('f');
-
-    if ($query = $criteria->query) {
-        $qb
-            ->where('f.name like :query')
-            ->orWhere('f.email like :query')
-            ->setParameter('query', sprintf('%%%s%%', str_replace('%', '\%', $query)))
-        ;
-    }
-
-    if ($sort = $criteria->sort) {
-        $qb
-            ->orderBy(sprintf('f.%s', $sort), $criteria->direction)
-        ;
-    }
-
-    return $qb;
+    return $this->createQueryBuilder('f');
+        ->where('f.name like :query')
+        ->orWhere('f.email like :query')
+        ->setParameter('query', sprintf('%%%s%%', str_replace('%', '\%', $query)))
+        ->orderBy(sprintf('f.%s', $sort), $criteria->direction)
+    ;
 }
 ```
 
@@ -199,31 +194,22 @@ public function createQueryBuilderFromCriteria(FooCriteria $criteria)
 
 public function index(Request $request, FormFactoryInterface $formFactory, FooRepository $repository)
 {
-    $config = $this->get('ttskch_pagerfanta.config');
+    $paginator = $this->get('ttskch_pagerfanta.paginator')
+        ->initialize('id', FooCriteria::class, FooSearchType::class)
+        ->handleRequest($request)
+    ;
 
-    $criteria = new FooCriteria($config->limitDefault, 'id' /* default sort key*/, $config->sortDirectionDefault);
+    $queryBuilder = $fooRepository->createQueryBuilderFromCriteria($paginator->criteria);
 
-    $searchForm = $formFactory->createNamed('', FooSearchType::class, $criteria, [
-        'method' => 'GET',
-    ]);
-    // don't use handleRequest because missing queries will clear corresponding fields of criteria.
-    $searchForm->submit($request->query->all(), false);
-
-    $queryBuilder = $repository->createQueryBuilderFromCriteria($criteria);
-    
     $adapter = new DoctrineORMAdapter($queryBuilder);
     $pagerfanta = new Pagerfanta($adapter);
     $pagerfanta
-        ->setMaxPerPage($criteria->limit)
-        ->setCurrentPage($criteria->page)
+        ->setMaxPerPage($paginator->criteria->limit)
+        ->setCurrentPage($paginator->criteria->page)
     ;
 
-    // prevent rendering page field to reset page to 1 after searching.
-    $formView = $searchForm->createView();
-    $formView->children[$config->pageName]->setRendered();
-    
     return $this->render('index.html.twig', [
-        'form' => $formView,
+        'form' => $paginator->form->createView(),
         'pagerfanta' => $pagerfanta,
     ]);
 }
