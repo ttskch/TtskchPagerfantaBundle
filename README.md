@@ -18,7 +18,7 @@ Advantages compared to [WhiteOctoberPagerfantaBundle](https://github.com/whiteoc
 
 You can easily try demo app like below on [demo branch](https://github.com/ttskch/TtskchPagerfantaBundle/tree/demo).
 
-![](https://user-images.githubusercontent.com/4360663/35520375-32194706-055a-11e8-9c87-7e8a0172b7fb.png)
+![](https://user-images.githubusercontent.com/4360663/35521752-e1d22a98-055d-11e8-9b9f-b593a1eb218f.png)
 
 ## Requirement
 
