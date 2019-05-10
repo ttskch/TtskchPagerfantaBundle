@@ -177,7 +177,7 @@ class FooSearchType extends CriteriaType
 
 public function createQueryBuilderFromCriteria(FooCriteria $criteria)
 {
-    return $this->createQueryBuilder('f');
+    return $this->createQueryBuilder('f')
         ->where('f.name like :query')
         ->orWhere('f.email like :query')
         ->setParameter('query', sprintf('%%%s%%', str_replace('%', '\%', $criteria->query)))
