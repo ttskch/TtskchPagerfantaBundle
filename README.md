@@ -23,7 +23,8 @@ You can easily try demo app like below on [demo branch](https://github.com/ttskc
 
 ## Requirement
 
-* Symfony ^3.4|^4.0
+* PHP ^7.1.3
+* Symfony ^4.0
 
 ## Installation
 
@@ -41,12 +42,19 @@ return [
 
 ## Usage
 
+```yaml
+# services.yaml
+
+services:
+    Ttskch\PagerfantaBundle\Context: "@ttskch_pagerfanta.context"
+```
+
 ```php
 // FooController.php
 
-public function index(FooRepository $fooRepository)
+public function index(FooRepository $fooRepository, Context $context)
 {
-    $context = $this->get('ttskch_pagerfanta.context')->initialize('id');
+    $context->initialize('id');
 
     $queryBuilder = $fooRepository
         ->createQueryBuilder('f')

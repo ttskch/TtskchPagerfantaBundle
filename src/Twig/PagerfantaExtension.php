@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Ttskch\PagerfantaBundle\Context;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class PagerfantaExtension extends AbstractExtension
 {
@@ -35,15 +36,15 @@ class PagerfantaExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('ttskch_pagerfanta_pager', [$this, 'renderPager'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('ttskch_pagerfanta_sortable', [$this, 'renderSortableLink'], ['is_safe' => ['html']]),
+            new TwigFunction('ttskch_pagerfanta_pager', [$this, 'renderPager'], ['is_safe' => ['html']]),
+            new TwigFunction('ttskch_pagerfanta_sortable', [$this, 'renderSortableLink'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function renderPager(Pagerfanta $pagerfanta, $templateName = null, array $context = [])
+    public function renderPager(Pagerfanta $pagerfanta, string $templateName = null, array $context = []): string
     {
         $templateName = $templateName ?: $this->context->config->templatePager;
 
@@ -76,7 +77,7 @@ class PagerfantaExtension extends AbstractExtension
         return $this->twig->render($templateName, $context);
     }
 
-    public function renderSortableLink($key, $text = null, $templateName = null, array $context = [])
+    public function renderSortableLink(string $key, string $text = null, string $templateName = null, array $context = []): string
     {
         $templateName = $templateName ?: $this->context->config->templateSortable;
 
@@ -103,10 +104,7 @@ class PagerfantaExtension extends AbstractExtension
         return $this->twig->render($templateName, $context);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'ttskch_pagerfanta';
     }

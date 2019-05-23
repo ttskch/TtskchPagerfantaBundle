@@ -43,14 +43,7 @@ class Context
         $this->formFactory = $formFactory;
     }
 
-    /**
-     * @param string $defaultSortKey
-     * @param string $criteriaClass
-     * @param string $formTypeClass
-     * @param Criteria|null $criteria
-     * @return $this
-     */
-    public function initialize($defaultSortKey, $criteriaClass = Criteria::class, $formTypeClass = CriteriaType::class, Criteria $criteria = null)
+    public function initialize(string $defaultSortKey, string $criteriaClass = Criteria::class, string $formTypeClass = CriteriaType::class, Criteria $criteria = null): self
     {
         $this->criteria = $criteria ?: new $criteriaClass($this->config->limitDefault, $defaultSortKey, $this->config->sortDirectionDefault);
 
@@ -63,10 +56,7 @@ class Context
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function handleRequest()
+    public function handleRequest(): self
     {
         // Don't use Form::handleRequest() because it will clear properties corresponding empty queries.
         $this->form->submit($this->request->query->all(), false);

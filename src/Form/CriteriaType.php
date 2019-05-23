@@ -10,7 +10,7 @@ use Ttskch\PagerfantaBundle\Entity\Criteria;
 
 class CriteriaType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): FormBuilderInterface
     {
         $builder
             ->add('page', HiddenType::class)
@@ -20,7 +20,7 @@ class CriteriaType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Criteria::class,
