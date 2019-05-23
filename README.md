@@ -13,6 +13,7 @@ Advantages compared to [WhiteOctoberPagerfantaBundle](https://github.com/whiteoc
 * Customizable **twig-templated views**
 * **Sortable link** feature
 * Easy to use with **search form**
+* Preset **bootstrap4 theme**
 
 ## Demo
 
@@ -34,7 +35,7 @@ $ composer require ttskch/pagerfanta-bundle:@dev
 // config/bundles.php
 return [
     // ...
-    Ttskch\PagerfantaBundle\TtskchPagerfantaBundle:class => ['all' => true],
+    Ttskch\PagerfantaBundle\TtskchPagerfantaBundle::class => ['all' => true],
 ];
 ```
 
@@ -119,6 +120,20 @@ ttskch_pagerfanta:
 ```
 
 ### Customizing views
+
+#### Use preset bootstrap4 theme
+
+Just configure bundle like below.
+
+```yaml
+# config/packages/ttskch_pagerfanta.yaml
+
+ttskch_pagerfanta:
+    template:
+        pager: '@TtskchPagerfanta/pager/bootstrap4.html.twig'
+```
+
+#### Use your own theme
 
 Create your own templates and configure bundle like below.
 
