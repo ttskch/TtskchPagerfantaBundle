@@ -35,6 +35,7 @@ $ composer require ttskch/pagerfanta-bundle
 
 ```php
 // config/bundles.php
+
 return [
     // ...
     Ttskch\PagerfantaBundle\TtskchPagerfantaBundle::class => ['all' => true],
