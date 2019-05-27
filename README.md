@@ -30,7 +30,7 @@ You can easily try demo app like below on [demo branch](https://github.com/ttskc
 ## Installation
 
 ```bash
-$ composer require ttskch/pagerfanta-bundle:@dev
+$ composer require ttskch/pagerfanta-bundle
 ```
 
 ```php
