@@ -16,5 +16,5 @@ ttskch_pagerfanta:
       name: direction
       default: asc
   template:
-    pager: 'pager.html.twig'
-    sortable: 'sortable.html.twig'
+    pager: pager.html.twig
+    sortable: sortable.html.twig

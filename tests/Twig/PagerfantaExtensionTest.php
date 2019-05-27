@@ -22,7 +22,7 @@ class PagerfantaExtensionTest extends WebTestCase
 
     public function setUp(): void
     {
-        self::createClient();
+        self::bootKernel();
 
         /** @var Context $context */
         $context = self::$container->get('ttskch_pagerfanta.context');
