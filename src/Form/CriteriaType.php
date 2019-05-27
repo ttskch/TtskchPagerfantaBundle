@@ -10,7 +10,7 @@ use Ttskch\PagerfantaBundle\Entity\Criteria;
 
 class CriteriaType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): FormBuilderInterface
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('page', HiddenType::class)
