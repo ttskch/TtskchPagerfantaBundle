@@ -51,8 +51,8 @@ class PagerfantaExtension extends AbstractExtension
         }
 
         $context = array_merge($context, [
-            'route' => $this->context->request->get('_route'),
-            'queries' => $this->context->request->query->all(),
+            'route' => $this->context->request ? $this->context->request->get('_route') : null,
+            'queries' => $this->context->request ? $this->context->request->query->all() : [],
             'limit_name' => $this->context->config->limitName,
             'limit_current' => $this->context->criteria->limit,
             'page_name' => $this->context->config->pageName,
@@ -80,11 +80,11 @@ class PagerfantaExtension extends AbstractExtension
         $nextDirection = $isSorted ? (strtolower($currentDirection) === 'asc' ? 'desc' : 'asc') : $this->context->config->sortDirectionDefault;
 
         // reset page number after re-sorting.
-        $queries = $this->context->request->query->all();
+        $queries = $this->context->request ? $this->context->request->query->all() : [];
         $queries[$this->context->config->pageName] = 1;
 
         $context = array_merge($context, [
-            'route' => $this->context->request->get('_route'),
+            'route' => $this->context->request ? $this->context->request->get('_route') : null,
             'queries' => $queries,
             'key_name' => $this->context->config->sortKeyName,
             'key' => $key,

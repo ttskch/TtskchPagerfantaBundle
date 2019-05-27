@@ -27,7 +27,7 @@ class Context
     public $config;
 
     /**
-     * @var null|Request
+     * @var Request|null
      */
     public $request;
 
@@ -59,7 +59,7 @@ class Context
     public function handleRequest(): self
     {
         // Don't use Form::handleRequest() because it will clear properties corresponding empty queries.
-        $this->form->submit($this->request->query->all(), false);
+        $this->form->submit($this->request ? $this->request->query->all() : null, false);
 
         return $this;
     }
