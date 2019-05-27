@@ -1,8 +1,8 @@
 # TtskchPagerfantaBundle
 
-[![Build Status](https://travis-ci.com/ttskch/TtskchPagerfantaBundle.svg?branch=master)](https://travis-ci.com/ttskch/TtskchPagerfantaBundle)
-[![Latest Stable Version](https://poser.pugx.org/ttskch/pagerfanta-bundle/version)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
-[![Total Downloads](https://poser.pugx.org/ttskch/pagerfanta-bundle/downloads)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
+[![Travis (.com)](https://img.shields.io/travis/com/ttskch/TtskchPagerfantaBundle.svg?style=flat-square)](https://travis-ci.com/ttskch/TtskchPagerfantaBundle)
+[![Latest Stable Version](https://poser.pugx.org/ttskch/pagerfanta-bundle/version?format=flat-square)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
+[![Total Downloads](https://poser.pugx.org/ttskch/pagerfanta-bundle/downloads?format=flat-square)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
 
 Most easy and customizable way to use [Pagerfanta](https://github.com/whiteoctober/Pagerfanta) with Symfony.
 
