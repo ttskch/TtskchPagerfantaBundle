@@ -3,7 +3,6 @@
 namespace Ttskch\PagerfantaBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Ttskch\PagerfantaBundle\Context;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -17,19 +16,13 @@ class PagerfantaExtension extends AbstractExtension
     private $context;
 
     /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    /**
      * @var Environment
      */
     private $twig;
 
-    public function __construct(Context $context, UrlGeneratorInterface $urlGenerator, Environment $twig)
+    public function __construct(Context $context, Environment $twig)
     {
         $this->context = $context;
-        $this->urlGenerator = $urlGenerator;
         $this->twig = $twig;
     }
 

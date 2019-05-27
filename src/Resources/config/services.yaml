@@ -25,5 +25,4 @@ services:
         tags: { name: twig.extension }
         arguments:
             - '@ttskch_pagerfanta.context'
-            - '@router'
             - '@twig'
