@@ -1,5 +1,6 @@
 # TtskchPagerfantaBundle
 
+[![Build Status](https://travis-ci.com/ttskch/TtskchPagerfantaBundle.svg?branch=master)](https://travis-ci.com/ttskch/TtskchPagerfantaBundle)
 [![Latest Stable Version](https://poser.pugx.org/ttskch/pagerfanta-bundle/version)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
 [![Total Downloads](https://poser.pugx.org/ttskch/pagerfanta-bundle/downloads)](https://packagist.org/packages/ttskch/pagerfanta-bundle)
 
