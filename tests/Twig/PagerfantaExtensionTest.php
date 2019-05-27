@@ -23,13 +23,14 @@ class PagerfantaExtensionTest extends WebTestCase
     public function setUp(): void
     {
         self::bootKernel();
+        $container = self::$kernel->getContainer();
 
         /** @var Context $context */
-        $context = self::$container->get('ttskch_pagerfanta.context');
+        $context = $container->get('ttskch_pagerfanta.context');
         $context->initialize('id');
 
         /** @var Environment $twig */
-        $twig = self::$container->get('twig');
+        $twig = $container->get('twig');
 
         $adapter = new ArrayAdapter([
             ['id' => 1, 'name' => 'name1'],
