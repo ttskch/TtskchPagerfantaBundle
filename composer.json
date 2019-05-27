@@ -1,7 +1,7 @@
 {
     "name": "ttskch/pagerfanta-bundle",
     "description": "Most easy and customizable way to use Pagerfanta with Symfony",
-    "keywords": ["pagerfanta", "symfony", "sortable", "customizable", "searchable"],
+    "keywords": ["symfony", "pagerfanta", "pagination", "paginator", "sortable", "customizable", "searchable"],
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
