@@ -101,7 +101,7 @@ public function index(FooRepository $fooRepository, Context $context)
 {{ ttskch_pagerfanta_pager(pagerfanta) }}
 ```
 
-See [Twig/PagerfantaExtension.php](Twig/PagerfantaExtension.php) to learn more about twig functions.
+See [src/Twig/PagerfantaExtension.php](src/Twig/PagerfantaExtension.php) to learn more about twig functions.
 
 ### Configuring
 
