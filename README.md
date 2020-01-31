@@ -48,6 +48,7 @@ return [
 # services.yaml
 
 services:
+    # alias to enable autowiring
     Ttskch\PagerfantaBundle\Context: "@ttskch_pagerfanta.context"
 ```
 
