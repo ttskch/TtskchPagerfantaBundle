@@ -245,9 +245,9 @@ public function createQueryBuilderFromCriteria(FooCriteria $criteria)
 ```php
 // FooController.php
 
-public function index(FooRepository $fooRepository)
+public function index(FooRepository $fooRepository, Context $context)
 {
-    $context = $this->get('ttskch_pagerfanta.context')->initialize('id', FooCriteria::class, FooSearchType::class);
+    $context->initialize('id', FooCriteria::class, FooSearchType::class);
 
     $queryBuilder = $fooRepository->createQueryBuilderFromCriteria($context->criteria);
 
