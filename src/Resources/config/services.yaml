@@ -26,3 +26,6 @@ services:
         arguments:
             - '@ttskch_pagerfanta.context'
             - '@twig'
+
+    # alias for autowiring
+    Ttskch\PagerfantaBundle\Context: '@ttskch_pagerfanta.context'
