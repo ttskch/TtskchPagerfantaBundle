@@ -9,10 +9,9 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('ttskch_pagerfanta', 'array');
+        $treeBuilder = new TreeBuilder('ttskch_pagerfanta');
 
-        $rootNode->addDefaultsIfNotSet()
+        $treeBuilder->getRootNode()->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('page')->addDefaultsIfNotSet()
                     ->children()
