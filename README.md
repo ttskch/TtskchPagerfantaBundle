@@ -221,6 +221,8 @@ class FooSearchType extends CriteriaType
     {
         $resolver->setDefaults([
             'data_class' => FooCriteria::class,
+            // if your app depends on symfony/security-csrf adding below is recommended
+            // 'csrf_protection' => false,
         ]);
     }
 }
