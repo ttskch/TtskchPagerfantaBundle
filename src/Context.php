@@ -49,7 +49,6 @@ class Context
 
         $this->form = $this->formFactory->createNamed('', $formTypeClass, $this->criteria, [
             'method' => 'GET',
-            'csrf_protection' => false,
         ]);
 
         $this->handleRequest();
