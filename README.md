@@ -97,6 +97,42 @@ public function index(FooRepository $fooRepository, Context $context)
 
 See [src/Twig/PagerfantaExtension.php](src/Twig/PagerfantaExtension.php) to learn more about twig functions.
 
+### Sort with property of joined entity
+
+```php
+// FooController.php
+
+// ...
+
+$queryBuilder = $fooRepository
+    ->createQueryBuilder('f')
+    ->leftJoin('f.parent', 'p')
+;
+
+if (preg_match('/^parent\.(.+)$/', $context->criteria->sort, $m)) {
+    $sort = sprintf('p.%s', $m[1]);
+} else {
+    $sort = sprintf('f.%s', $context->criteria->sort);
+}
+
+$queryBuilder->orderBy($sort, $context->criteria->direction);
+
+// ...
+```
+
+```twig
+{# index.html.twig #}
+
+{# ... #}
+
+<th>{{ ttskch_pagerfanta_sortable(id) }}</th>
+<th>{{ ttskch_pagerfanta_sortable(name) }}</th>
+<th>{{ ttskch_pagerfanta_sortable(email) }}</th>
+<th>{{ ttskch_pagerfanta_sortable(parent.id) }}</th>
+
+{# ... #}
+```
+
 ### Configuring
 
 ```bash
