@@ -1,3 +1,7 @@
+# ⚠️ No longer under maintenance
+
+This bundle is no longer under maintenance on today. Please use [TtskchPaginatorBundle](https://github.com/ttskch/TtskchPagerfantaBundle) instead.
+
 # TtskchPagerfantaBundle
 
 [![Travis (.com)](https://img.shields.io/travis/com/ttskch/TtskchPagerfantaBundle.svg?style=flat-square)](https://travis-ci.com/ttskch/TtskchPagerfantaBundle)
